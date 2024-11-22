@@ -6,10 +6,10 @@ import argparse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
-# poetry run img2pdfpy "/Users/hahazexiahahazexia/Desktop/learn/天上天下_单行本" "" "many"
+# poetry run img2pdfpy -i "/Users/hahazexiahahazexia/Desktop/learn/天上天下_单行本" -p "none" -c "many"
 def images_to_pdf(img_folder, pdf_filename):
     output_name = pdf_filename
-    if pdf_filename == '':
+    if pdf_filename == 'none':
         output_name = "{}.pdf".format(os.path.basename(img_folder))
 
     print("output_name is {}".format(output_name))
@@ -66,9 +66,9 @@ def get_first_level_folders(img_folder):
 
 def main():
     parser = argparse.ArgumentParser(description='Convert images to a PDF file.')
-    parser.add_argument('img_folder', type=str, help='Path to the folder containing images.')
-    parser.add_argument('pdf_filename', type=str, default="", help='Output PDF file name.')
-    parser.add_argument('convert_type', type=str, default='one',help='Source file type. one many')
+    parser.add_argument('--img_folder', '-i', type=str, help='Path to the folder containing images.')
+    parser.add_argument('--pdf_filename', '-p', type=str, default="none", help='Output PDF file name.')
+    parser.add_argument('--convert_type', '-c', type=str, default='one',help='Source file type. one many')
 
     args = parser.parse_args()
     img_folder = args.img_folder
