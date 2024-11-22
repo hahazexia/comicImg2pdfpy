@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "img2pdfpy"
+version = "0.1.0"
+description = ""
+authors = ["zexiazhou <zexiazhou@tencent.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+reportlab = "^4.2.5"
+tqdm = "^4.67.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+img2pdfpy = "img2pdfpy.cli:main"
