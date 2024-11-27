@@ -6,7 +6,7 @@ import argparse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
-# poetry run img2pdfpy -i "/Users/hahazexiahahazexia/Desktop/learn/天上天下_单行本" -p "none" -c "many"
+# poetry run img2pdfpy -i "/Users/hahazexiahahazexia/Downloads/租借女友(32)" -p "none" -c "many"
 def images_to_pdf(img_folder, pdf_filename):
     output_name = pdf_filename
     if pdf_filename == 'none':
