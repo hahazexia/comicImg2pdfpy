@@ -19,7 +19,7 @@ def images_to_pdf(img_folder, pdf_filename):
     # 获取文件夹中的所有图片文件
     images = [f for f in os.listdir(img_folder) if f.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
     # 按照文件名的数字顺序排序
-    images.sort(key=lambda x: int(os.path.splitext(x)[0]))
+    images.sort(key=lambda x: int(extract_numbers(os.path.splitext(x)[0])[-1]))
 
     # 创建 PDF 文件
     c = canvas.Canvas(output_name, pagesize=letter)
@@ -50,6 +50,11 @@ def extract_number(folder_name):
     numbers = re.findall(r'\d+', folder_name)
     return int(numbers[0]) if numbers else float('inf')  # 如果没有数字，返回无穷大以排在最后
 
+def extract_numbers(input_string):
+    # 使用正则表达式提取所有数字
+    numbers = re.findall(r'\d+', input_string)
+    return numbers
+
 def get_first_level_folders(img_folder):
     # 确保提供的路径是一个有效的目录
     if not os.path.isdir(img_folder):
@@ -78,7 +83,7 @@ def main():
     convert_type = args.convert_type
 
     if convert_type == 'one':
-        images_to_pdf(args.img_folder, args.pdf_filename)
+        images_to_pdf(args.img_folder, pdf_filename)
     else:
         folders = get_first_level_folders(img_folder)
         for path, name in folders:
