@@ -75,12 +75,16 @@ def main():
     parser = argparse.ArgumentParser(description='Convert images to a PDF file.')
     parser.add_argument('--img_folder', '-i', type=str, help='Path to the folder containing images.')
     parser.add_argument('--pdf_filename', '-p', type=str, default="none", help='Output PDF file name.')
-    parser.add_argument('--convert_type', '-c', type=str, default='one',help='Source file type. one many')
+    parser.add_argument('--convert_type', '-c', type=str, default='many',help='Source file type. one many')
 
     args = parser.parse_args()
     img_folder = args.img_folder
     pdf_filename = args.pdf_filename
     convert_type = args.convert_type
+
+    print(f"-i: {img_folder}")
+    print(f"-p: {pdf_filename}")
+    print(f"-c: {convert_type}")
 
     if convert_type == 'one':
         images_to_pdf(args.img_folder, pdf_filename)
