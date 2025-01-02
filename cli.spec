@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['img2pdfpy\\cli.py'],
+    ['img2pdfpy/cli.py'],
     pathex=[],
     binaries=[],
     datas=[],
