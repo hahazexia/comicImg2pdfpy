@@ -7,6 +7,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.utils import ImageReader
 
+# /Users/hahazexia/Downloads/comic/TYPE-MOON
 # poetry run img2pdfpy -i "C:\Users\hahaz\Downloads\帝王之子_单行本_upscale2" -p "none" -c "many"
 
 def images_to_pdf(img_folder, pdf_filename):
@@ -88,12 +89,29 @@ def main():
 
     if convert_type == 'one':
         images_to_pdf(args.img_folder, pdf_filename)
-    else:
+    elif convert_type == 'many':
         folders = get_first_level_folders(img_folder)
         for path, name in folders:
             os.makedirs("{}_pdf".format(img_folder), exist_ok=True)
             output_path = "{}_pdf/{}.pdf".format(img_folder, name)
             images_to_pdf(path, output_path)
+    elif convert_type == 'author':
+        author_name = os.path.basename(img_folder)
+        parent_directory = os.path.dirname(img_folder)
+        new_author_dir = os.path.join(parent_directory, "{}_pdf".format(author_name))
+        os.makedirs(new_author_dir, exist_ok=True)
+        
+        for comic in os.listdir(img_folder):
+            if ".DS_Store" in comic:
+                continue
+            comic_path = os.path.join(img_folder, comic)
+            folders = get_first_level_folders(comic_path)
+            for path, name in folders:
+                os.makedirs("{}/{}".format(new_author_dir, comic), exist_ok=True)
+                output_path = "{}/{}/{}.pdf".format(new_author_dir, comic, name)
+                images_to_pdf(path, output_path)
+
+
 
 if __name__ == '__main__':
     import multiprocessing
